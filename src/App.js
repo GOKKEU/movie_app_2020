@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 //설치한 axios를 import합니다.
 import Movie from "./Movie";
-
+import "./App.css";
 //클레스를 선언 합니다.
 //React.Component를 상속 받습니다.
 class App extends React.Component {
@@ -37,20 +37,27 @@ class App extends React.Component {
 
         //(3)isLoading이 true Loading ,false we are ready 를 div에 추가 합니다.
         return (
-            <div>
-                {isLoading
-                    ? "Loading"
-                    : movies.map(movie => (
-                          <Movie
-                              key={movie.id}
-                              id={movie.id}
-                              year={movie.year}
-                              title={movie.title}
-                              summary={movie.summary}
-                              poster={movie.medium_cover_image}
-                          />
-                      ))}
-            </div>
+            <section className="container">
+                {isLoading ? (
+                    <div className="loader">
+                        <span className="loader__text">Loading...</span>
+                    </div>
+                ) : (
+                    <div className="movies">
+                        {movies.map(movie => (
+                            <Movie
+                                key={movie.id}
+                                id={movie.id}
+                                year={movie.year}
+                                title={movie.title}
+                                summary={movie.summary}
+                                poster={movie.medium_cover_image}
+                                genres={movie.genres}
+                            />
+                        ))}
+                    </div>
+                )}
+            </section>
         );
     }
 }
